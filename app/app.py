@@ -4,7 +4,6 @@ import os
 import logging
 from celery import Celery
 from celery.signals import after_task_publish
-from flask import Flask, json, request, render_template, send_file
 import uvicorn
 from fastapi import FastAPI, Form, File, UploadFile
 from fastapi.responses import FileResponse
