@@ -1,0 +1,10 @@
+msgpack-python
+celery[redis]
+matplotlib
+fastapi
+uvicorn
+pydantic
+fpdf
+sklearn
+scipy
+
