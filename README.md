@@ -1,6 +1,8 @@
 # DISTRIBUTED-ML-PRODUCTION-DEMO
 
 FastAPI, Celery, RabbitMQ, Redis를 이용한 머신러닝 모델 예측 작업 수행 및 분산 처리 demo
+![celery](https://user-images.githubusercontent.com/50973416/92310540-71de4800-efea-11ea-8893-e594b211f330.png)
+
 
 
 ## 파일 구조
