@@ -23,7 +23,17 @@ FastAPI, Celery, RabbitMQ, Redis를 이용한 머신러닝 모델 예측 작업 
         ├── run_celery.sh
         └── run_web.sh
 
+## 준비
+    virtualenv -p python3.7 .env
+
+    source .env/bin/activate
+
+    pip3 install -r requirements.txt
+
+
 ## 실행법
     docker-compose build
+    
     docker-compose up
+    
     docker-compose scale worker=N
