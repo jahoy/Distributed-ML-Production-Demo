@@ -41,7 +41,7 @@ async def predict(data: Optional[Flower] = Form(...)):
 
 
 @app.get('/download/')
-async def result(taskid: Optional[int] = None):
+async def result(taskid: Optional[str] = None):
     """ 
     PDF결과를 다운로드한다.
     """
@@ -53,7 +53,7 @@ async def result(taskid: Optional[int] = None):
 
 
 @app.get('/progress/')
-async def progress(taskid: Optional[int] = None):
+async def progress(taskid: Optional[str] = None):
     """ 
     task_id의 진행상태를 check한다
     """
