@@ -5,7 +5,7 @@ import logging
 from celery import Celery
 from celery.signals import after_task_publish
 import uvicorn
-from fastapi import FastAPI, Form, File, UploadFile
+from fastapi import FastAPI, Form, File, UploadFile, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
 from app import celery_tasks
@@ -20,6 +20,10 @@ class Flower(BaseModel):
     petal_length: float
     petal_width: float
 
+    @classmethod
+    def as_form(cls, sepal_length: float = Form(...), sepal_width: float = Form(...), petal_length: float = Form(...), petal_width: float = Form(...)) -> Flower:
+        return cls(sepal_length=sepal_length, sepal_width=sepal_width, petal_length=petal_length, petal_width=petal_width)
+
 app = FastAPI()
 
 @app.get('/')
@@ -31,7 +35,7 @@ async def index():
 
 
 @app.post('/predict')
-async def predict(data: Optional[Flower] = Form(...)):
+async def predict(data: Flower = Depends(Flower.as_form)):
     """ 
     celery를 통한 예측을 진행한다.
     """
@@ -49,7 +53,7 @@ async def result(taskid: Optional[str] = None):
         task = await celery_tasks.get_task(taskid)
         pdf_output = await task.get()
         return FileResponse(pdf_output)
-    return 404
+    raise HTTPException(status_code=404, detail="Item not found")
 
 
 @app.get('/progress/')
